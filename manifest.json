@@ -2,9 +2,9 @@
   //https://developer.chrome.com/extensions/manifest
 
 
-  "name": "Automatic Job Submission",
+  "name": "Jobs Auto Apply",
   "version": "1.1",
-  "description": "Automatically to jobs you search via LinkedIn QuickApply",
+  "description": "Automatically apply to jobs on job sites like LinkedIn",
   "offline_enabled": true,
   "manifest_version": 2,
 
@@ -24,7 +24,6 @@
         "js/core.js",
         "js/config.js",
         "sites/linkedin.js",
-        // "sites/facebook.js",
         "js/init.js"
       ],
       "run_at": "document_start",
@@ -63,18 +62,10 @@
     // Match patterns for web pages. Does not affect content scripts.
     // If this field is not specified, no webpages can connect.
     "matches": [
-      "*://facebook.com/*",
-      "*://twitter.com/*",
+      // "*://indeed.com/*",
+      // "*://monster.com/*",
+      // "*://glassdoor.com/*",
       "*://linkedin.com/*",
-      "*://instagram.com/*",
-      "*://google.com/*",
-      "*://goo.gl/*",
-      "*://yahoo.com/*",
-      "*://search.yahoo.com/*",
-      "*://bing.com/*",
-      "*://duckduckgo.com/*",
-      "*://ask.com/*",
-      "*://aol.com/*"
     ],
     // Indicates that the extension would like to make use of the TLS
     // channel ID of the web page connecting to it. The web page must

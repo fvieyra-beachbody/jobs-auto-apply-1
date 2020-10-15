@@ -113,5 +113,217 @@ app.bind({
         searchServices: [],
         //search auto start
         autoStart: {}
-    }
+    },
+    questions: {
+        experience: {
+            'search': 'years of'
+        },
+        certification: {
+            'search': 'certification'
+        },
+        startWork: {
+            'search': 'start immediately'
+        },
+        notice: {
+            'search': 'Notice period',
+        },
+        location: {
+            'search': 'Current Location'
+        },
+        authorized: {
+            'search': 'authorized'
+        },
+        citizenship: {
+            'search': 'citizenship'
+        },
+        employment: {
+            'search': 'employment'
+        },
+        education: {
+            'search': 'education'
+        },
+        address: {
+            'search': 'address '
+        },
+        employed: {
+            'search': 'employed'
+        },
+        fullTime: {
+            'search': 'Full Time employee'
+        },
+        relocate: {
+            'search': 'relocate'
+        },
+        city: {
+            'search': 'City'
+        },
+        onsite: {
+            'search': 'work onsite'
+        },
+        immigration: {
+            'search': 'immigration status'
+        },
+        considering: {
+            'search': 'Considering a Change'
+        },
+        sponsorship: {
+            'search': 'sponsorship'
+        },
+        postalCode: {
+            'search': 'Postal Code'
+        },
+        commuting: {
+            'search': 'commuting'
+        },
+        clearance: {
+            'search': 'clearance'
+        },
+        polygraph: {
+            'search': 'polygraph'
+        },
+        relative: {
+            'search': 'relative'
+        },
+        english: {
+            'search': 'english'
+        },
+        salary: {
+            'search': 'salary'
+        },
+        state: {
+            'search': 'State'
+        },
+        gender: {
+            'search': 'Gender'
+        },
+        name: {
+            'search': 'Name'
+        },
+        sms: {
+            'search': 'SMS'
+        }
+    },
+    answers: {
+        experience: {
+            'Content Management': 16,
+            'Oracle Cloud': 3,
+            'Microsoft': 12,
+            'Consulting': 12,
+            'Engineering': 12,
+            'Management': 7,
+            'Technology': 12,
+            'Powershell': 5,
+            'Embedded': 8,
+            'WordPress': 12,
+            'Magento': 8,
+            'Mulesoft': 1,
+            'Dynamics': 5,
+            'GraphQL': 3,
+            'Drupal': 9,
+            'UiPath': 1,
+            'GCP': 5,
+            'XML': 16,
+            'Unix': 8,
+            'Linux': 8,
+            'Python': 6,
+            'SOAP': 12,
+            'JAVA': 14,
+            'SaaS': 12,
+            'SSRS': 5,
+            'Cisco': 5,
+            'Azure': 5,
+            'Sales': 12,
+            'Jamf': 3,
+            'AWS': 8,
+            'GCP': 5,
+            'C++': 5,
+            'C#': 5
+        },
+        certification: {
+            'Amazon': 'No',
+            'Dynamics': 'No',
+            'Cisco': 'No'
+        },
+        authorized: {
+            'authorized': 'Yes',
+        },
+        fullTime: {
+            'employee': 'Yes'
+        },
+        employment: {
+            'employment': 'No',
+        },
+        education: {
+            'Bachelor': 'No'
+        },
+        relocate: {
+            'relocate': 'Yes'
+        },
+        employed: {
+            'employed': 'No'
+        },
+        english: {
+            'english': 'Yes'
+        },
+        startWork: {
+            'start': 'Yes',
+        },
+        onsite: {
+            'onsite': 'Yes',
+        },
+        sponsorship: {
+            'sponsorship': 'No'
+        },
+        commuting: {
+            'commuting': 'Yes'
+        },
+        clearance: {
+            'clearance': 'No',
+        },
+        polygraph: {
+            'polygraph': 'No',
+        },
+        relative: {
+            'relative': 'No'
+        },
+        sms: {
+            'SMS': 'Yes'
+        },
+        salary: {
+            'salary': '245000'
+        },
+        state: {
+            'State': 'Texas'
+        },
+        gender: {
+            'Gender': 'Male'
+        },
+        city: {
+            'City': 'Houston'
+        },
+        postalCode: {
+            'ZIP': '77002'
+        },
+        notice: {
+            'notice': '2 week'
+        },
+        name: {
+            'Name': 'Fortune Vieyra'
+        },
+        location: {
+            'location': 'San Jose, CA'
+        },
+        address: {
+            'address': '945 McKinney Street #574' 
+        },
+        considering: {
+            'considering': 'Seeking new opportunities'
+        },
+        citizenship: {
+            'citizenship': 'U.S. Citizen/Permanent Resident'
+        },
+        immigration: {
+            'imigration': 'US Citizen'
+        }
+    },
 });
