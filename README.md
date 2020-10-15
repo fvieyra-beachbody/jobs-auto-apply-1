@@ -18,23 +18,6 @@ The following features are currently supported
 * Auto-Fill Form Fields      - Inserts text and answers questions found in the form per your configuration
 * Next Page Navigation       - Clicks on the next page of the search result once all jobs are walked through
 
-
-
-### General Configuration
-General config.js options that you can update
-* Ajax Support         - app.config.ajaxSettings
-* Search Suffixes      - app.config.searchSuffixes
-* Search Services      - app.config.searchServices
-
-### App Configuration
-For those who want to extend the app itself
-* Main Tabs            - app.config.mainTabs
-* File Actions         - app.config.fileActions
-* Search Crawlers      - app.config.searchCrawlers
-* App Settings         - app.config.appSettings
-* Default Search       - app.config.defaultSearch
-
-
 ## Usage - Configuration
 To make configuration changes, open the `./js/config.js` file.
 A UI may come later for the non-technical folks.
