@@ -173,4 +173,3 @@ MIT License. Copyright 2020 Fortune Vieyra
 ## Authors & contributors
 * Fortune Vieyra '@fortunevieyra http://www.linkedin.com/in/fortunevieyra'
 
-# jobs-auto-apply
