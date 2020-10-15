@@ -119,37 +119,59 @@ A UI may come later for the non-technical folks.
 To add another website:
 1. Copy and rename the `./sites/linkedin.js` file.
 2. Save the new file in the `./sites/` directory. Example: `./sites/yoursite.js`
-3. Rename all `'linkedin'` strings to the new website name
-4. Open the `./manifest.json` file and add `"sites/yoursite.js",` after `"sites/linkedin.js",`
-5. Open `sites/yoursite.js` and make changes in the `app.config.autoStart` code block
-
-### app.config.searchServices
-
+3. Open the `./manifest.json` file and add `"sites/yoursite.js",` after `"sites/linkedin.js",`
+### manifest.json
 ```javascript
-app.config.searchServices = [
+ "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globals": [
+        "*://*/*"
+      ],
+      "css": [
+        // "css/app.css"
+      ],
+      "js": [
+        "js/core.js",
+        "js/config.js",
+        "sites/linkedin.js",
+      //"sites/yoursite.js",
+        "js/init.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+```
+
+4. Open `sites/yoursite.js` and rename all the `'linkedin'` strings to your site name 
+### sites/yoursite.js
+```javascript
+// set autostart services
+app.config.autoStart['yoursite'] = function() {
+    var storage = 'local'; //local, session
+    ...
+}
+```
+
+5. In the `app.config.searchServices` block, rename the `domain` and `url` to match your site.
+### app.config.searchServices
+```javascript
+app.config.searchServices = app.add([
     {
         text: '',
         active: true,
         enable: true,
-        name: 'google',
-        icon: 'google',
-        url: 'https://www.google.com/search?q=',
+        name: 'yoursite',
+        icon: 'yoursite',
+        domain: 'www.yoursite.com',
+        url: 'https://www.yoursite.com',
         clickButton: false,
-        searchButton: '#sfdiv button[type="submit"]',
-        searchForm: '#tsf',
-        searchText: '#lst-ib,.gLFyf.gsfi',
-        resultLink: '#rso div.srg div.g div.rc h3 a',
-        resultDesc: '#rso div.srg div.g div.rc div.s div .st',
-        pagifyLink: '#nav a.fl',
-        otherTerms: '#brs div.card-section div.brs_col p a',
-        repeatLink: '#ofr a',
-        pageNumber: '&num=',
-        pageStart: '&start=',
-        spawnCount: 25,
-        resultSize: 100,
-        resultAdd: 0
+        ...
     }
-];
+], app.config.searchServices );
 ```
 
 
