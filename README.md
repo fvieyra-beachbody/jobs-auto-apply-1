@@ -1,23 +1,23 @@
 # Personal Thought
-Because scraping is still a big deal in the public domain, why not just go all out.
-The original idea was to build a Google Search scraper that would be used to search any blog using a unique search term.
-But it turned out to be very useful at scraping other search engines using what ever search term imaginable.
-Personally, it has helped me download 18,000 blockchain whitepapers in roughly 2 weeks for research purpose :-).
+If you've ever applied for jobs online, you know how time consuming it is. Thanks to some job sites finally releasing EASY/QUICK apply features, it's now possible to take it a step further. Let's be honest, do you really have the time to apply to hundreds of job postings? I built this chrome extension to "extend" my time doing other things like studying for interviews or listening to audiobooks.
 
-# Search Engine Scraper
+# Jobs Auto Apply
 
-Search Engien Scraper is a Google Chrome extension that simply injects css and javascript on a search engine results page.
-The goal is to create the ULTIMATE search engine scraper that works on all major search engines and social search engines.
+Jobs Auto Apply is a Google Chrome extension that simply injects javascript on a jobs search result page.
+All you have to do is configure the settings to match your job answers, go to LinkedIn Jobs and search something.
+Jobs Auto Apply will do the rest of the clicking, form filling, and navigating. 
 
 ## What's implemented so far?
-
+Currently the following features are supported on LinkedIn Jobs. 
 
 ### General Features
 The following features are currently supported
-* Search History       - View search results from previously searched terms 
-* Search Collection    - Collection of search results from previous searches
-* CSV File Upload      - Upload a CSV file and take a specific batch action
-* Batch Processing     - Search multiple terms via batch processing
+* Walking Through Jobs       - Automatically click on a job item in the search result list
+* Pick Easy Apply Jobs       - Clicks on the jobs that support Easy/Quick Apply and ignores others
+* Navigate Pop-Up Boxes      - Clicks on the next buttons in the pop-up box until it reachs the end
+* Auto-Fill Form Fields      - Inserts text and answers questions found in the form per your configuration
+* Next Page Navigation       - Clicks on the next page of the search result once all jobs are walked through
+
 
 
 ### General Configuration
@@ -37,70 +37,91 @@ For those who want to extend the app itself
 
 ## Usage - Configuration
 To make configuration changes, open the `./js/config.js` file.
+A UI may come later for the non-technical folks.
 
-### app.config.ajaxSettings
-
-```javascript
-app.config.ajaxSettings = {
-    get: {
-        url: '',
-        headers: {
-            'accept': '*/*',
-            'cache-control': 'no-cache',
-            'x-requested-with': 'XMLHttpRequest',
-            'content-type': 'application/json; charset=UTF-8'
-        },
-        // success: function(){ },
-        // failure: function(){ },
-        // always: function(){ }
-    },
-    post: {
-        url: '',
-        headers: {
-            'accept': '*/*',
-            'cache-control': 'no-cache',
-            'x-requested-with': 'XMLHttpRequest',
-            'content-type': 'application/json; charset=UTF-8'
-        },
-        //comment to run default process
-        // success: function(){ },
-        // failure: function(){ },
-        // always: function(){ }
-    }
-};
-```
-
-### app.config.searchSuffixes
+### app.questions
 
 ```javascript
-app.config.searchSuffixes = [
-    {
-        active: true,
-        name: 'wordpress_blog',
-        value: ' blog "wordpress.com"'
-    },
-    {
-        active: false,
-        name: 'wikipedia_wiki',
-        value: ' wiki "wikipedia.com"'
-    },
-    {
-        active: false,
-        name: 'youtube_video',
-        value: ' video "youtube.com"'
-    }, 
-    {
-        active: false,
-        name: 'google_patent',
-        value: ' google patent "uspts.gov"'
-    },
-    {
-        active: false,
-        name: 'whois_search',
-        value: ' "domain information" "whois.com"'
-    }
-];
+   questions: {
+        experience: {
+            'search': 'years of'
+        },
+        certification: {
+            'search': 'certification'
+        },
+        startWork: {
+            'search': 'start immediately'
+        },
+        notice: {
+            'search': 'Notice period',
+        },
+        location: {
+            'search': 'Current Location'
+        },
+        authorized: {
+            'search': 'authorized'
+        },
+        ...
+   }
 ```
+
+### app.answers 
+```javascript
+ answers: {
+        experience: {
+            'Content Management': 16,
+            'Oracle Cloud': 3,
+            'Microsoft': 12,
+            'Consulting': 12,
+            'Engineering': 12,
+            'Management': 7,
+            'Technology': 12,
+            'Powershell': 5,
+            'Embedded': 8,
+            'WordPress': 12,
+            'Magento': 8,
+            'Mulesoft': 1,
+            'Dynamics': 5,
+            'GraphQL': 3,
+            'Drupal': 9,
+            'UiPath': 1,
+            'GCP': 5,
+            'XML': 16,
+            'Unix': 8,
+            'Linux': 8,
+            'Python': 6,
+            'SOAP': 12,
+            'JAVA': 14,
+            'SaaS': 12,
+            'SSRS': 5,
+            'Cisco': 5,
+            'Azure': 5,
+            'Sales': 12,
+            'Jamf': 3,
+            'AWS': 8,
+            'GCP': 5,
+            'C++': 5,
+            'C#': 5
+        },
+        certification: {
+            'Amazon': 'No',
+            'Dynamics': 'No',
+            'Cisco': 'No'
+        },
+        authorized: {
+            'authorized': 'Yes',
+        },
+        ...
+    }
+```
+
+## Adding more sites
+To add another website:
+1. Copy and rename the `./sites/linkedin.js` file.
+2. Save the new file in the `./sites/` directory. Example: `./sites/yoursite.js`
+3. Rename all `'linkedin'` strings to the new website name
+4. Open the `./manifest.json` file and add `"sites/yoursite.js",` after `"sites/linkedin.js",`
+5. Open `sites/yoursite.js` and make changes in the `app.config.autoStart` code block
 
 ### app.config.searchServices
 
@@ -127,252 +148,8 @@ app.config.searchServices = [
         spawnCount: 25,
         resultSize: 100,
         resultAdd: 0
-    }, 
-    {
-        text: '',
-        active: false,
-        enable: true,
-        name: 'bing',
-        icon: 'internet-explorer',
-        url: 'https://www.bing.com/search?q=',
-        clickButton: false,
-        searchButton: '#sb_form_go',
-        searchForm: '#sb_form',
-        searchText: '#sb_form_q',
-        resultLink: '#b_results .b_algo h2 a',
-        resultDesc: '#b_results .b_algo div.b_caption p',
-        pagifyLink: 'ul.sb_pagF li a',
-        otherTerms: '#b_results .b_ans .b_rs .b_rich div ul li a',
-        repeatLink: '#b_results .b_msg a',
-        pageNumber: false,
-        pageStart: '&first=',
-        spawnCount: 25,
-        resultSize: 50,
-        resultAdd: 0
-    }, 
-    {
-        text: '',
-        active: false,
-        enable: true,
-        name: 'yahoo',
-        icon: 'yahoo',
-        url: 'https://search.yahoo.com?p=',
-        clickButton: true,
-        searchButton: '#sf input[type="submit"]',
-        searchForm: '#sf',
-        searchText: '#yschsp',
-        resultLink: 'ol.searchCenterMiddle .compTitle h3 a',
-        resultDesc: 'ol.searchCenterMiddle .compText p',
-        pagifyLink: '.compPagination a',
-        otherTerms: '.AlsoTry table tbody tr td a',
-        repeatLink: false,
-        pageNumber: '&pz=',
-        pageStart: '&b=',
-        spawnCount: 25,
-        resultSize: 100,
-        resultAdd: 1
-
-    }, 
-    {
-        text: '',
-        active: false,
-        enable: false,
-        name: 'yandex',
-        icon: 'yahoo',
-        url: 'http://www.yandex.com/search/?text=',
-        clickButton: true,
-        searchButton: '.search2__button button[type="submit"]',
-        searchForm: '.search2',
-        searchText: '.search2__input input[type="search"]',
-        resultLink: '.serp-item .serp-item__title a',
-        resultDesc: '.serp-item .serp-item__text',
-        pagifyLink: '.pager_js_inited a',
-        otherTerms: false,
-        repeatLink: false,
-        pageNumber: false,
-        pageStart: '&p=',
-        spawnCount: 25,
-        resultSize: 1,
-        resultAdd: 0
-    }, 
-    {
-        text: '',
-        active: false,
-        enable: true,
-        name: 'duckduckgo',
-        icon: 'search-plus',
-        url: 'http://www.duckduckgo.com/?q=',
-        clickButton: true,
-        searchButton: '#search_button',
-        searchForm: '#search_form',
-        searchText: '#search_form_input',
-        resultLink: '.result__body h2 a.result__check',
-        resultDesc: '.result__body .result__snippet',
-        pagifyLink: false,
-        otherTerms: false,
-        repeatLink: false,
-        pageNumber: false,
-        pageStart: false,
-        spawnCount: false,
-        resultSize: false,
-        resultAdd: false
     }
 ];
-```
-
-### app.config.mainTabs
-
-```javascript
-app.config.mainTabs = [
-    {
-        name: 'collection',
-        text: 'Collection',
-        total: 0
-    },
-    {
-        name: 'search',
-        text: 'Search Results',
-        total: 0
-    },
-    {
-        name: 'upload',
-        text: 'Upload File',
-        total: 0
-    },
-    {
-        name: 'comment',
-        text: 'Post Comment',
-        total: 0
-    },
-    {
-        name: 'process',
-        text: 'Batch Process',
-        total: 0
-    }
-];
-```
-
-
-### app.config.fileActions
-
-```javascript
-app.config.fileActions = [
-    {
-        active: false,
-        name: 'process',
-        text: 'Batch Process'
-    },
-    {
-        active: false,
-        name: 'comment',
-        text: 'Post Comment'
-    }
-];
-```
-
-
-### app.config.searchCrawlers
-
-```javascript
-app.config.searchCrawlers = [
-    {
-        name: 'search',
-        active: false
-    }, {
-        name: 'suffix',
-        active: true
-    },
-    {
-        name: 'locale',
-        active: false
-    }
-];
-```
-
-
-### app.config.appSettings
-
-```javascript
-app.config.appSettings = [
-    {
-        active: false,
-        name: 'service',
-        value: 'Edit Services',
-        callback: app.editServices
-    }, {
-        active: false,
-        name: 'suffix',
-        value: 'Edit Suffixes',
-        callback: app.editSuffixes
-    }, {
-        active: false,
-        name: 'reload',
-        value: 'Reload Application',
-        callback: app.reloadApplication
-    }
-];
-```
-
-
-
-### app.config.defaultSearch
-
-```javascript
-app.config.defaultSearch = [
-    {
-        name: 'Crawler',
-        group: 'Crawlers',
-    }, {
-        name: 'Service',
-        group: 'Services'
-    }, {
-        name: 'Suffix',
-        group: 'Suffixes'
-    }
-];
-```
-
-## Usage - Extending
-To safely extend the app object, open the `./js/extend.js` file.
-
-### app.bind
-Using the `app.bind` method, you can extend the app object
-
-```javascript
-app.bind({
-    //say hello
-    hello: function(){ 
-        return 'world'; 
-    }
-});
-```
-
-
-### app.add
-Using the `app.add` method, you can add more items to the app config options
-
-```javascript
-//append array of items to searchSuffixes
-app.config.searchSuffixes = app.add([
-    {
-        active: false,
-        name: 'white_paper_pdf',
-        value: ' white paper pdf'
-    },
-    {
-        active: false,
-        name: 'blockchain_whitepaper_com',
-        value: ' "blockchain" "whitepaper" pdf ".com"'
-    }
-], app.config.searchSuffixes );
-```
-
-### app.setActiveConfig
-Using the `app.setActiveConfig` method, you can set an item in config options as active
-
-```javascript
-//set the white_paper_pdf item in app.config.searchSuffixes as active
-app.setActiveConfig( 'searchSuffixes', 'white_paper_pdf' );
 ```
 
 
@@ -385,10 +162,10 @@ To install the extension
 
 ### License
 
-MIT License. Copyright 2018 Fortune Vieyra
+MIT License. Copyright 2020 Fortune Vieyra
 
 
 ## Authors & contributors
-* Fortune Vieyra '@fortune http://www.gredger.com'
+* Fortune Vieyra '@fortunevieyra http://www.linkedin.com/in/fortunevieyra'
 
 # jobs-auto-apply
