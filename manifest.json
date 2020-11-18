@@ -3,7 +3,7 @@
 
 
   "name": "Jobs Auto Apply",
-  "version": "1.1",
+  "version": "1.2",
   "description": "Automatically apply to jobs on job sites like LinkedIn",
   "offline_enabled": true,
   "manifest_version": 2,
@@ -24,6 +24,7 @@
         "js/core.js",
         "js/config.js",
         "sites/linkedin.js",
+        "sites/indeed.js",
         "js/init.js"
       ],
       "run_at": "document_start",
@@ -62,10 +63,11 @@
     // Match patterns for web pages. Does not affect content scripts.
     // If this field is not specified, no webpages can connect.
     "matches": [
-      // "*://indeed.com/*",
+      "*://indeed.com/*",
+      "*://apply.indeed.com/*",
       // "*://monster.com/*",
       // "*://glassdoor.com/*",
-      "*://linkedin.com/*",
+      "*://linkedin.com/*"
     ],
     // Indicates that the extension would like to make use of the TLS
     // channel ID of the web page connecting to it. The web page must
@@ -110,7 +112,7 @@
 
 
   "browser_action": {
-      "default_title": "Auto Apply",
+      "default_title": "Jobs Auto Apply",
       "default_icon": "img/icon.png",
       "default_popup": "app.html"
   },

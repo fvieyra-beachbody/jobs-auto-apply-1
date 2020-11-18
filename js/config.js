@@ -154,11 +154,23 @@ app.bind({
         relocate: {
             'search': 'relocate'
         },
+        workin: {
+            'search': 'work in'
+        },
         city: {
             'search': 'City'
         },
         onsite: {
             'search': 'work onsite'
+        },
+        available: {
+            'search': 'available'
+        },
+        veteran: {
+            'search': 'Veteran'
+        },
+        ethnicity: {
+            'search': 'Ethnicity'
         },
         immigration: {
             'search': 'immigration status'
@@ -196,8 +208,14 @@ app.bind({
         gender: {
             'search': 'Gender'
         },
+        start: {
+            'search': 'to start'
+        },
         name: {
             'search': 'Name'
+        },
+        race: {
+            'search': 'Race'
         },
         sms: {
             'search': 'SMS'
@@ -206,11 +224,20 @@ app.bind({
     answers: {
         experience: {
             'Content Management': 16,
+            'Supply Chain': 6,
+            'Group Policy': 4,
             'Oracle Cloud': 3,
+            'Epic Systems': 1,
+            'Real Estate': 5,
             'Microsoft': 12,
+            'Azure IoT': 3,
+            'Azure DevOps': 3,
+            'Manufacturing': 1,
             'Consulting': 12,
             'Engineering': 12,
             'Management': 7,
+            'Marketing': 10,
+            'Advertising': 8,
             'Technology': 12,
             'Powershell': 5,
             'Embedded': 8,
@@ -219,12 +246,20 @@ app.bind({
             'Mulesoft': 1,
             'Dynamics': 5,
             'GraphQL': 3,
+            'VSphere': 3,
+            'Invision': 4,
             'Drupal': 9,
+            'ESXi': 4,
             'UiPath': 1,
+            'Retail': 12,
             'GCP': 5,
             'XML': 16,
+            'VBA': 5,
+            'UML': 4,
             'Unix': 8,
             'Linux': 8,
+            'Vue.js': 3,
+            'Laravel': 4,
             'Python': 6,
             'SOAP': 12,
             'JAVA': 14,
@@ -240,54 +275,61 @@ app.bind({
             'C#': 5
         },
         certification: {
-            'Amazon': 'No',
-            'Dynamics': 'No',
-            'Cisco': 'No'
+            'Amazon': 'no',
+            'Dynamics': 'no',
+            'Cisco': 'no'
         },
         authorized: {
-            'authorized': 'Yes',
+            'authorized': 'yes',
         },
         fullTime: {
-            'employee': 'Yes'
+            'employee': 'yes'
         },
         employment: {
-            'employment': 'No',
+            'employment': 'no',
         },
         education: {
-            'Bachelor': 'No'
+            'Bachelor': 'no'
         },
         relocate: {
-            'relocate': 'Yes'
+            'relocate': 'yes',
+            'work_in': 'yes'
+        },
+        workin: {
+            'workin': 'yes'
         },
         employed: {
-            'employed': 'No'
+            'employed': 'no'
         },
         english: {
-            'english': 'Yes'
+            'english': 'yes'
         },
         startWork: {
-            'start': 'Yes',
+            'start': 'yes',
         },
         onsite: {
-            'onsite': 'Yes',
+            'onsite': 'yes',
         },
         sponsorship: {
-            'sponsorship': 'No'
+            'sponsorship': 'no'
         },
         commuting: {
-            'commuting': 'Yes'
+            'commuting': 'yes'
         },
         clearance: {
-            'clearance': 'No',
+            'clearance': 'no',
         },
         polygraph: {
-            'polygraph': 'No',
+            'polygraph': 'no',
         },
         relative: {
-            'relative': 'No'
+            'relative': 'no'
+        },
+        available: {
+            'available': 'any time'
         },
         sms: {
-            'SMS': 'Yes'
+            'SMS': 'yes'
         },
         salary: {
             'salary': '245000'
@@ -320,10 +362,22 @@ app.bind({
             'considering': 'Seeking new opportunities'
         },
         citizenship: {
-            'citizenship': 'U.S. Citizen/Permanent Resident'
+            'citizenship': 'U.S. Citizen'
         },
         immigration: {
             'imigration': 'US Citizen'
-        }
+        },
+        ethnicity: {
+            'ethnicity': 'Black'
+        },
+        veteran: {
+            'veteran': 'I am not'
+        },
+        start: {
+            'start': 'next week'
+        },
+        race: {
+            'race': 'Black'
+        },
     },
 });
