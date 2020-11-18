@@ -264,94 +264,82 @@ app.config.autoStart['linkedin'] = function() {
     };
     // set prefill section
     var prefillSections = function(){
-        // check for form section element
-        let groups = document.querySelectorAll('.jobs-easy-apply-form-section__grouping');
-        // check question type
-        let questions = app.questions;
-        let answers = app.answers;
-        // set counts
-        let added = 0;
-        let total = 0;
-        // loop in labels
-        if( groups.length > 0 ) {
-            // set total
-            total = groups.length;
-            // look in groups
-            for( var l=0; l < groups.length;l++ ) {
-                // set section labels
-                let group = groups[ l ];
-                let label = group.querySelectorAll('.fb-form-element-label' );
-                let input = group.querySelectorAll('.fb-single-line-text__input' );
-                let radio = group.querySelectorAll('.fb-radio-buttons input' );
-                let datep = group.querySelectorAll('.artdeco-datepicker-input-container input');
-                let cdate = group.querySelectorAll('.artdeco-current-day');
-                let select = group.querySelectorAll('.fb-select' );
-                // check for label
-                if( label && label.length > 0 ) {
-                    // check if label has experience years
-                    for( var type in questions ) {
-                        // check if found
-                        let search = questions[ type ]['search'];
-                        let after = questions[ type ]['after'];
-                        let answer = answers[ type ];
-                        // check questions
-                        if( label[0].innerText.indexOf( search ) !== -1 ) {
-                            // set find
-                            let find = label[0].innerText;
-                            // check answers
-                            for(var key in answer) {
-                                // set low
-                                let lkey = (key+'').toLowerCase();
-                                let lfnd = (find+'').toLowerCase();
-                                let valu = (answer[ key ]+'').toLowerCase();
-                                // check if found
-                                if( lfnd.indexOf( lkey ) !== -1 ) {
-                                    // check for radio
-                                    if( radio.length > 1 ) {
-                                        // get lower case versions
-                                        let rd01 = (radio[0].value+'').toLowerCase();
-                                        let rd02 = (radio[1].value+'').toLowerCase();
-                                        let rd03 = (radio[2])?(radio[2].value+'').toLowerCase():false;
-                                        // check value
-                                        if( rd01.indexOf( valu ) !== -1 ) {
-                                            // radio[0].checked = 'checked';
-                                            app.click( radio[0] );
-                                            added++;
-                                        }
-                                        else if( rd02.indexOf( valu ) !== -1 ) {
-                                            // radio[1].checked = 'checked';
-                                            app.click( radio[1] );
-                                            added++;
-                                        }
-                                        else if( rd03 && rd03.indexOf( valu ) !== -1 ) {
-                                            // radio[1].checked = 'checked';
-                                            app.click( radio[2] );
-                                            added++;
-                                        }
-                                    }
-                                    // check for input
-                                    else if( input.length > 0 && input[0].value === '') {
-                                        added += simulateClick( input[0], valu, 'input' );
-                                    }
-                                    // check for select
-                                    else if( select.length > 0 && select[0].value === '') {
-                                        added += simulateClick( select[0], valu, 'select' );
-                                    }
-                                    // check for select
-                                    else if( datep.length > 0 ) {
-                                        added += app.click( datep[0] );
-                                        window.setTimeout( () => {
-                                            if( cdate.length > 0 ) app.click( cdate[0] );
-                                        },1000);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return ( total === added );
+    	// check for form section element
+    	let groups = document.querySelectorAll('.jobs-easy-apply-form-section__grouping');
+    	// check question type
+    	let questions = app.questions;
+    	let answers = app.answers;
+    	// set counts
+    	let added = 0;
+    	let total = 0;
+    	// loop in labels
+    	if( groups.length > 0 ) {
+    		// set total
+    		total = groups.length;
+    		// look in groups
+	    	for( var l=0; l < groups.length;l++ ) {
+	    		// set section labels
+	    		let group = groups[ l ];
+	    		let label = group.querySelectorAll('.fb-form-element-label' );
+	    		let input = group.querySelectorAll('.fb-single-line-text__input' );
+	    		let radio = group.querySelectorAll('.fb-radio-buttons input' );
+	    		let select = group.querySelectorAll('.fb-select' );
+	    		// check for label
+	    		if( label && label.length > 0 ) {
+		    		// check if label has experience years
+		    		for( var type in questions ) {
+		    			// check if found
+		    			let search = questions[ type ]['search'];
+		    			let after = questions[ type ]['after'];
+		    			let answer = answers[ type ];
+	    				// check questions
+	    				if( label[0].innerText.indexOf( search ) !== -1 ) {
+	    					// set find
+	    					let find = label[0].innerText;
+	    					// check answers
+	    					for(var key in answer) {
+	    						// set low
+	    						let lkey = (key+'').toLowerCase();
+	    						let lfnd = (find+'').toLowerCase();
+	    						let valu = answer[ key ];
+	    						// check if found
+	    						if( lfnd.indexOf( lkey ) !== -1 ) {
+	    							// check for radio
+	    							if( radio.length > 1 ) {
+	    								// check value
+	    								if( radio[0].value === valu ) {
+	    									// radio[0].checked = 'checked';
+	    									app.click( radio[0] );
+	    									added++;
+	    								}
+	    								else if( radio[1].value === valu ) {
+	    									// radio[1].checked = 'checked';
+	    									app.click( radio[1] );
+	    									added++;
+	    								}
+    									else if( radio[2] && radio[2].value === valu ) {
+	    									// radio[1].checked = 'checked';
+	    									app.click( radio[1] );
+	    									added++;
+	    								}
+	    							}
+	    							// check for input
+	    							else if( input.length > 0 && input[0].value === '') {
+	    								added += simulateClick( input[0], valu, 'input' );
+	    							}
+	    							// check for select
+	    							else if( select.length > 0 && select[0].value === '') {
+	    								added += simulateClick( select[0], valu, 'select' );
+	    							}
+
+	    						}
+	    					}
+	    				}
+		    		}
+		    	}
+	    	}
+	    }
+	    return ( total === added );
     };
     // set my network contacts
     var myNetworkContacts = function(){
@@ -501,96 +489,96 @@ app.config.autoStart['linkedin'] = function() {
     };
     //click next item
     var clickNextItem = function(){
-        if( app.debug ) debugger;
-        // do nothing if next page
-        if( nextPage ) return false;
-        // get list item
-        let nextItem = false;
-        let listItems = getListItems();
-        let listPages = getPageItems();
-        let activeItem = getActiveItem();
-        let activePage = getActivePage();
-        // check for active item
-        if( activeItem && activeItem.length > 0 ) {
-            // look in list items
-            for(var i=0; i < listItems.length;i++ ) {
-                // check for active item
-                if( listItems[i].className.indexOf('-active') !== -1 && !nextPage ) {
-                    // check if next item exists
-                    if( listItems[ (i+1) ] && listItems[ (i+1) ].title !== 'next' ) {
-                        nextItem = listItems[ (i+1) ];
-                        nextItem.title = 'next';
-                        app.click( nextItem );
-                        nextItem.scrollIntoView(true);
-                        break;
-                    } else {
-                        // set item
-                        let item = activePage[0];
-                        // check item
-                        if( item ) {
-                            let span = item.querySelector('span');
-                            // click next page
-                            nextPage = clickNextPage( span.innerText );
-                        }
-                    }
-                }
-            }
-        } else {
-            // check for list item
-            if( listItems[0] ) {
-                listItems[0].scrollIntoView(true);
-                app.click( listItems[0] );
-            }
-        }
-        return {
-            list: {
-                items: listItems,
-                pages: listPages,
-            },
-            next: {
-                item: nextItem,
-                page: nextPage
-            },
-            active: { 
-                item: activeItem,
-                page: activePage
-            }
-        };
+    	if( app.debug ) debugger;
+    	// do nothing if next page
+    	if( nextPage ) return false;
+    	// get list item
+    	let nextItem = false;
+    	let listItems = getListItems();
+    	let listPages = getPageItems();
+    	let activeItem = getActiveItem();
+    	let activePage = getActivePage();
+    	// check for active item
+    	if( activeItem && activeItem.length > 0 ) {
+    		// look in list items
+    		for(var i=0; i < listItems.length;i++ ) {
+    			// check for active item
+    			if( listItems[i].className.indexOf('-active') !== -1 && !nextPage ) {
+    				// check if next item exists
+    				if( listItems[ (i+1) ] && listItems[ (i+1) ].title !== 'next' ) {
+    					nextItem = listItems[ (i+1) ];
+    					nextItem.title = 'next';
+    					app.click( nextItem );
+    					nextItem.scrollIntoView(true);
+    					break;
+    				} else {
+    					// set item
+    					let item = activePage[0];
+    					// check item
+    					if( item ) {
+	    					let span = item.querySelector('span');
+	    					// click next page
+	    					nextPage = clickNextPage( span.innerText );
+	    				}
+    				}
+    			}
+    		}
+    	} else {
+    		// check for list item
+    		if( listItems[0] ) {
+    			listItems[0].scrollIntoView(true);
+    			app.click( listItems[0] );
+    		}
+    	}
+    	return {
+    		list: {
+    			items: listItems,
+    			pages: listPages,
+    		},
+    		next: {
+    			item: nextItem,
+    			page: nextPage
+    		},
+    		active: { 
+    			item: activeItem,
+    			page: activePage
+    		}
+    	};
     };
     // click next page
     var clickNextPage = function( pageNumber ){
-        if( app.debug ) debugger;
-        // get list item
-        let listPages = getPageItems();
-        let next = ((parseInt( pageNumber ) + 1)+'');
+    	if( app.debug ) debugger;
+    	// get list item
+    	let listPages = getPageItems();
+    	let next = ((parseInt( pageNumber ) + 1)+'');
         let didClick = false;
-        // check for active item
-        if( listPages && listPages.length > 1 ) {
-            // loop in list pages
-            for(var i=0; i < listPages.length;i++ ) {
-                // set item
-                let item = listPages[i];
-                // check for item
-                if( item ) {
-                    // get item
-                    let span = item.querySelector('span');
-                    // set text
-                    let text = span.innerText;
-                    // check for active item
-                    if( text === next || text === '…' ) {
-                        app.click( item );
-                        nextPage = item;
+    	// check for active item
+    	if( listPages && listPages.length > 1 ) {
+    		// loop in list pages
+    		for(var i=0; i < listPages.length;i++ ) {
+    			// set item
+    			let item = listPages[i];
+    			// check for item
+    			if( item ) {
+	    			// get item
+	    			let span = item.querySelector('span');
+	    			// set text
+	    			let text = span.innerText;
+	    			// check for active item
+	    			if( text === next || text === '…' ) {
+	    				app.click( item );
+	    				nextPage = item;
                         didClick = true;
-                        break;
-                    }
-                }
-            }
+	    				break;
+	    			}
+	    		}
+    		}
             // check if clicked
             if( !didClick ) {
                 app.click( listPages[0] );
             }
-        }
-        return nextPage;
+    	}
+    	return nextPage;
     }; 
     // apply to job process
     var applyToJob = function(){
